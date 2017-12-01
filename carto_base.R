@@ -44,7 +44,26 @@ regions<-readOGR(dsn="C:/Users/Benoit/Documents/Work/Rfichiers/Githuber/geo_data
                  layer="REGION")
 plot(regions)
 
+op<-par(mar=c(0,0,0,0))
+plot(EPCI,border="grey60",lwd=0.1)
+plot(departe,add=TRUE,border="darkred",lwd=0.5)
+plot(regions,add=TRUE,lwd=1.5)
 
 plot(arrond,border="grey60",lwd=0.1)
-plot(departe,add=TRUE,border="red",lwd=0.5)
-plot(regions,add=TRUE,lwd=2)
+plot(departe,add=TRUE,border="darkred",lwd=0.5)
+plot(regions,add=TRUE,lwd=1.5)
+plot(arrond[c(23,27,45,122),],add=TRUE,col="blue")
+
+plot(departe,border="darkred",lwd=0.5)
+plot(regions,add=TRUE,lwd=1.5)
+plot(departe[departe$INSEE_DEP=="01",],add=TRUE,col="blue")
+par(op)
+
+#selecting a commune or a list of commune with INSEE ID
+commu[commu$INSEE_COM=="63453",]
+commu[commu$INSEE_COM %in% c("43033","63453"),]
+
+
+
+
+
