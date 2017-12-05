@@ -23,6 +23,9 @@ setwd("~/work/Rfichiers/Githuber/carto_france")
 #the smallest administrative unit in France: communes
 commu<-readOGR(dsn="C:/Users/Benoit/Documents/Work/Rfichiers/Githuber/geo_data/ADE_1-1_SHP_LAMB93_FR",
                layer="COMMUNE")
+class(commu)
+slotNames(commu)
+summary(commu@data)
 plot(commu)
 
 #EPCI means "Etablissements Publics de Coopération Intercommunale"
