@@ -15,8 +15,9 @@ library(classInt)
 #loading the data and producing lighter dataset
 ###############################################################################
 
-#the geographical layer used here were downloaded on the IGN website (Geofla), 
-#which is the French Institut of Geographic and forest information
+#the geographical layer used here were downloaded on the french public dataset 
+#https://www.data.gouv.fr/fr/datasets/admin-express/ (which used to be Geofla, 
+#from IGN which is the French Institut of Geographic and forest information)
 
 #the smallest administrative unit in France: communes
 commu<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/ADE_1-1_SHP_LAMB93_FR",
@@ -68,7 +69,6 @@ plot(regionsLight)
 #some example of geographic data manipulation
 ###############################################################################
 
-
 #some information on the data structure of the geodata
 class(commu)
 slotNames(commu)
@@ -94,7 +94,31 @@ par(op)
 commu[commu$INSEE_COM=="63453",]
 commu[commu$INSEE_COM %in% c("43033","63453"),]
 
+#isolate the information in the spatial data on the communes
+db_commu<-commu@data
+summary(db_commu)
+db_arrond<-arrond@data
+db_arrond$DEPARR<-paste(db_arrond$INSEE_DEP,db_arrond$INSEE_ARR,sep="-")
+summary(db_arrond)
+db_arrond
+
+#extract the coordinates of the department
+ind_list<-departe$INSEE_DEP
+coorddep<-data.frame("longitude"=departe@polygons[1][[1]]@labpt[1],
+                     "latitude"=departe@polygons[1][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  cbind("longitude"=departe@polygons[i][[1]]@labpt[1],
+                        "latitude"=departe@polygons[i][[1]]@labpt[2]))
+}
+coorddep<-cbind(ind_list,coorddep)
+#example of use
+NomDepSP<-SpatialPoints(coorddep[,2:3])
+NomDepSP$depID<-coorddep[,1]
+plot(departeLight)
+text(NomDepSP,labels=NomDepSP$depID)
 
 
-
-
+###############################################################################
+#END
+###############################################################################
