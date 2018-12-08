@@ -94,6 +94,12 @@ par(op)
 commu[commu$INSEE_COM=="63453",]
 commu[commu$INSEE_COM %in% c("43033","63453"),]
 
+#the path to access to the barycentre of the commune
+commu@polygons[1][[1]]@labpt
+
+#coordinates of the barycentre of the departement
+departe@polygons[1][[1]]@labpt
+
 #isolate the information in the spatial data on the communes
 db_commu<-commu@data
 summary(db_commu)
