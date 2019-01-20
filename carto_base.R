@@ -12,7 +12,7 @@ library(classInt)
 
 
 ###############################################################################
-#loading the data and producing lighter dataset
+#loading the data and producing lighter dataset and .RData files
 ###############################################################################
 
 #the geographical layer used here were downloaded on the french public dataset 
@@ -66,7 +66,7 @@ plot(regionsLight)
 
 
 ###############################################################################
-#some example of geographic data manipulation
+#some examples of geographic data manipulation
 ###############################################################################
 
 #some information on the data structure of the geodata
