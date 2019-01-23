@@ -66,6 +66,44 @@ plot(regionsLight)
 
 
 ###############################################################################
+#production of coordinates table for regions and departement
+###############################################################################
+
+#table for the departements####
+load("output/departe.RData")
+#extract the department coordinates
+ind_list<-data.frame("dep_NAME"=departe$NOM_DEP,
+                     "dep_ID"=departe$INSEE_DEP)
+coorddep<-data.frame("longitude"=departe@polygons[1][[1]]@labpt[1],
+                     "latitude"=departe@polygons[1][[1]]@labpt[2])
+for (i in 2:dim(ind_list)[1]){
+  coorddep<-rbind(coorddep, 
+                  cbind("longitude"=departe@polygons[i][[1]]@labpt[1],
+                        "latitude"=departe@polygons[i][[1]]@labpt[2]))
+}
+coorddep<-cbind(ind_list,coorddep)
+#save as .RData
+save(coorddep,file="output/coorddep.RData")
+
+
+#table for the regions####
+load("output/regions.RData")
+#extract the department coordinates
+ind_list<-data.frame("reg_NAME"=regions$NOM_REG,
+                     "reg_ID"=regions$INSEE_REG)
+coordreg<-data.frame("longitude"=regions@polygons[1][[1]]@labpt[1],
+                     "latitude"=regions@polygons[1][[1]]@labpt[2])
+for (i in 2:dim(ind_list)[1]){
+  coordreg<-rbind(coordreg, 
+                  cbind("longitude"=regions@polygons[i][[1]]@labpt[1],
+                        "latitude"=regions@polygons[i][[1]]@labpt[2]))
+}
+coordreg<-cbind(ind_list,coordreg)
+#save as .RData
+save(coordreg,file="output/coordreg.RData")
+
+
+###############################################################################
 #some examples of geographic data manipulation
 ###############################################################################
 
