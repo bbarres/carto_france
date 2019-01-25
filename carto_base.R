@@ -99,6 +99,9 @@ for (i in 2:dim(ind_list)[1]){
                         "latitude"=regions@polygons[i][[1]]@labpt[2]))
 }
 coordreg<-cbind(ind_list,coordreg)
+coordreg<-cbind(coordreg,
+                "reg_CODENAME"=c("ARA","BFC","BRE","CVL","COR","GES","HDF",
+                                 "IDF","NOR","NAQ","OCC","PDL","PAC"))
 #save as .RData
 save(coordreg,file="output/coordreg.RData")
 
