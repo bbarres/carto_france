@@ -25,12 +25,14 @@ library(RColorBrewer)
 ReuDep<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/ADE_1-1_SHP_RGR92UTM40S_D974",
                 layer="DEPARTEMENT")
 ReuDep<-st_as_sf(ReuDep)
+st_crs(ReuDep)<-2975     #or EPSG:4971?
 save(ReuDep,file="output/ReuDep.RData")
 
 #the Réunion Island commune shapefile
 ReuCom<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/ADE_1-1_SHP_RGR92UTM40S_D974",
                 layer="COMMUNE")
 ReuCom<-st_as_sf(ReuCom)
+st_crs(ReuCom)<-2975     #or EPSG:4971?
 save(ReuCom,file="output/ReuCom.RData")
 
 #the geographical layer used here were downloaded on the french public dataset 
@@ -40,6 +42,7 @@ save(ReuCom,file="output/ReuCom.RData")
 ReuUrb<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/DenseEtaleDisperse2017",
                 layer="DenseEtaleDisperse2017Polygon")
 ReuUrb<-st_as_sf(ReuUrb)
+st_crs(ReuUrb)<-2975     #or EPSG:4971?
 ReuUrb<-st_simplify(ReuUrb,preserveTopology=FALSE,dTolerance=10)
 ReuUrb<-st_buffer(ReuUrb,dist=10,joinStyle="MITRE")
 ReuUrb<-st_union(ReuUrb)
@@ -50,6 +53,7 @@ plot(ReuUrb,col="red",border="red")
 ReuVeg<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/vegetation_onf",
                 layer="vegetation_onfPolygon")
 ReuVeg<-st_as_sf(ReuVeg)
+st_crs(ReuVeg)<-2975     #or EPSG:4971?
 ReuVeg<-st_simplify(ReuVeg,preserveTopology=FALSE,dTolerance=10)
 ReuVeg<-st_buffer(ReuVeg,dist=10,joinStyle="MITRE")
 ReuVeg<-st_union(ReuVeg)
@@ -60,6 +64,7 @@ plot(ReuVeg,col="darkgreen",border="darkgreen",add=TRUE)
 ReuAgri<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/bos2013_daaf",
                  layer="bos2013_daafPolygon")
 ReuAgri<-st_as_sf(ReuAgri)
+st_crs(ReuAgri)<-2975     #or EPSG:4971?
 ReuAgri<-st_simplify(ReuAgri,preserveTopology=TRUE,dTolerance=10)
 ReuAgri<-st_buffer(ReuAgri,dist=10,joinStyle="MITRE")
 ReuAgri<-st_union(ReuAgri)
