@@ -12,6 +12,7 @@ library(plotrix)
 library(classInt)
 library(sf)
 library(RColorBrewer)
+library(raster)
 
 
 ##############################################################################/
@@ -71,6 +72,12 @@ ReuAgri<-st_union(ReuAgri)
 save(ReuAgri,file="output/ReuAgri.RData")
 plot(ReuAgri,col="yellowgreen",border="yellowgreen",add=TRUE)
 
+#Altitude data, downloaded from http://dwtkns.com/srtm/
+ReuAlt<-raster(x="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/Reunion/srtm_48_17/srtm_48_17.tif")
+newproj<-"+proj=utm +zone=40 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+ReuAlt<-projectRaster(ReuAlt,crs=newproj)
+plot(ReuAlt,col=grey(100:30/100,alpha=0.2),axes=FALSE,legend=FALSE)
+
 #example of map
 plot(ReuDep$geometry,col=brewer.pal(11,"Spectral")[6],lwd=3)
 plot(ReuUrb,col=brewer.pal(9,"RdPu")[3],
@@ -79,6 +86,7 @@ plot(ReuVeg,col=brewer.pal(9,"BuGn")[6],
      border=brewer.pal(9,"BuGn")[6],add=TRUE)
 plot(ReuAgri,col=brewer.pal(8,"Accent")[1],
      border= brewer.pal(8,"Accent")[1],add=TRUE)
+plot(ReuAlt,col=grey(500:0/500,alpha=0.3),axes=FALSE,legend=FALSE,add=TRUE)
 plot(ReuDep$geometry,col="transparent",lwd=3,add=TRUE)
 
 #export to .pdf 20 x 18 inches
