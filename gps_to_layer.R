@@ -61,5 +61,20 @@ int<-st_intersects(ambro18_sf,temp)
 
 
 ##############################################################################/
+#New simplified shapefile####
+##############################################################################/
+
+DEP_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="DEPARTEMENT")
+save(DEP_SHP,file="output/DEP_SHP.RData")
+
+
+DEP_SHP.wgs<-spTransform(DEP_SHP,
+                           CRS("+proj=longlat +datum=WGS84"))
+plot(DEP_SHP.wgs)
+
+
+
+##############################################################################/
 #END
 ##############################################################################/
