@@ -167,6 +167,42 @@ text(NomDepSP,labels=NomDepSP$depID)
 
 
 ##############################################################################/
+#New simplified shapefile####
+##############################################################################/
+
+#the shapefiles were simplified using mapshaper (https://mapshaper.org/) with
+#simplification method Visvalingam / weighted area at 1% (except for 
+#COMMUNE at 5%)
+REG_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="REGION")
+save(REG_SHP,file="output/REG_SHP.RData")
+plot(REG_SHP)
+
+DEP_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="DEPARTEMENT")
+save(DEP_SHP,file="output/DEP_SHP.RData")
+plot(DEP_SHP)
+DEP_SHP.wgs<-spTransform(DEP_SHP,
+                         CRS("+proj=longlat +datum=WGS84"))
+plot(DEP_SHP.wgs)
+
+ARR_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="ARRONDISSEMENT_DEPARTEMENTAL")
+save(ARR_SHP,file="output/ARR_SHP.RData")
+plot(ARR_SHP)
+
+EPC_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="EPCI")
+save(EPC_SHP,file="output/EPC_SHP.RData")
+plot(EPC_SHP)
+
+COM_SHP<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/carto_france/data/FRANCE_METRO",
+                 layer="COMMUNE")
+save(COM_SHP,file="output/COM_SHP.RData")
+plot(COM_SHP,lwd=0.2)
+
+
+##############################################################################/
 #Writing info session for reproducibility####
 ##############################################################################/
 
