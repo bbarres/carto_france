@@ -69,6 +69,28 @@ plot(regionsLight)
 #production of coordinates table for regions and departement####
 ##############################################################################/
 
+#table for the commune####
+load("output/commu.RData")
+#extract the department coordinates
+ind_list<-data.frame("com_NAME"=commu$NOM_COM_M,
+                     "com_ID"=commu$INSEE_COM)
+coordcom<-data.frame("longitude"=commu@polygons[1][[1]]@labpt[1],
+                     "latitude"=commu@polygons[1][[1]]@labpt[2])
+for (i in 2:dim(ind_list)[1]){
+  coordcom<-rbind(coordcom, 
+                  cbind("longitude"=commu@polygons[i][[1]]@labpt[1],
+                        "latitude"=commu@polygons[i][[1]]@labpt[2]))
+}
+coordcom<-cbind(ind_list,coordcom)
+#save as .RData
+save(coordcom,file="output/coordcom.RData")
+#example of use
+load("output/COM_SHP.RData")
+plot(COM_SHP,lwd=0.1)
+text(coordcom$longitude,coordcom$latitude,cex=0.1,
+     labels=coordcom$com_NAME,col="darkred")
+points(coordcom$longitude,coordcom$latitude,col="blue",cex=0.01,pch=19)
+
 #table for the departements####
 load("output/departe.RData")
 #extract the department coordinates
